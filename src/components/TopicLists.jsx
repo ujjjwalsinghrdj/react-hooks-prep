@@ -31,7 +31,7 @@ const TopicLists = ({ userNames, userAge, userGender, onShow, isAdmin }) => {
         <li>{userAge.age}</li>
         <li>{userGender}</li>
       </ul>
-      <img src={reactImg} alt="dadasd" />
+      <img src={reactImg} alt="dadasd" className="d-none"/>
       <Button variant="primary" onClick={onShow}>
         Show Name
       </Button>
