@@ -3,14 +3,26 @@ import "./App.css";
 import { Button, Container } from "react-bootstrap";
 import TopicLists from "./components/TopicLists";
 import Cards from "./components/Cards";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Reducer_main from "./components/reduer-comp";
 import Todos from "./components/Todos";
+import Refuse from "./components/Refuse";
+import FancyRef from "./components/FancyRef";
+import Formref from "./components/Formref";
 
 function App() {
   const [initial, setInitial] = useState(0); //basic
   const [user, setUser] = useState({ name: "ujjwal", age: 25 }); //object
   const [updateName, setUpdateName] = useState(["ujjwal", "prajjwal", "rishi"]);
+  const renderCount = useRef(0);
+  const inputFocusRef = useRef(null);
+  const fancyRef = useRef(null);
+  const formRef = useRef(null);
+
+  function incrementNum() {
+    renderCount.current = renderCount.current + 1;
+    console.log(renderCount.current);
+  }
 
   function addName(text) {
     setUpdateName([...updateName, text]);
@@ -67,7 +79,28 @@ function App() {
         isAdmin={true} // cpnditional rendering
       />
       <Reducer_main />
-      <Todos/>
+      <Todos />
+      <div className="py-3">
+        <p>{renderCount.current}</p>
+        {/* Note: UI never updates, because changing a ref doesn't re-render! */}
+        <button className="btn btn-danger" onClick={incrementNum()}>
+          increse ref count
+        </button>
+      </div>
+
+      <Refuse ref={inputFocusRef} />
+      <FancyRef ref={fancyRef} />
+      <button onClick={() => fancyRef.current.focus()}>focus</button>
+      <button onClick={() => fancyRef.current.clear()}>clear</button>
+      <div className="py-4">
+        <Formref ref={formRef} />
+        <button onClick={() => formRef.current.focusEmail()}>
+          focus Email
+        </button>
+        <button onClick={() => formRef.current.focusPassword()}>
+          Focus Password
+        </button>
+      </div>
     </Container>
   );
 }
