@@ -9,6 +9,7 @@ import Todos from "./components/Todos";
 import Refuse from "./components/Refuse";
 import FancyRef from "./components/FancyRef";
 import Formref from "./components/Formref";
+import Learneffects from "./components/Learneffects";
 
 function App() {
   const [initial, setInitial] = useState(0); //basic
@@ -100,6 +101,9 @@ function App() {
         <button onClick={() => formRef.current.focusPassword()}>
           Focus Password
         </button>
+      </div>
+      <div className="my-4">
+        <Learneffects />
       </div>
     </Container>
   );
